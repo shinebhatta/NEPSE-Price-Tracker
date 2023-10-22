@@ -5,8 +5,17 @@
     <title>Chrome Extension Notifiction Example</title>
 </head>
 <body>
-    <p>Test body</p>
-    <p></p>
+    <form id="ID">
+        <label>
+            Enter Company ID
+        </label>
+        <input id="CompanyID" type="text" required>
+        <input type="submit">
+    </form>
+    <button onclick="FindData()">See Data</button>
+    <div class="output">
+    </div>
+    <script src="./popup.js"></script>
     <script src="./background.js"></script>
 </body>
 </html>

@@ -1,30 +1,47 @@
-// Fetches data from API
-fetch('https://the-value-crew.github.io/nepse-api/data/date/latest.json')
+let diff, obj;
 
-.then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json(); // Assuming the API returns JSON data
-  })
+document.querySelector("#ID").onsubmit = Company
 
-  .then(data => {
-    // Process the data from the API
-    console.log(data);
-  })
+const IDs = []
 
-  // Checks if there is error
-  .catch(error => {
-    console.error('There was a problem with the fetch operation:', error);
-  });
+function Company(){
+  const CompanyID =  document.querySelector('#CompanyID')
+  console.log(CompanyID.value)
+  // Adds to Array
+  IDs.push(CompanyID.value)
+  // Resets CompanyID
+  CompanyID.value = ""
+  console.log(IDs)
+  return false
+}
 
+// Fetches data from API for today's date
+function FindData(){
+  IDs.map(function(element){
+    
+    fetch(`https://the-value-crew.github.io/nepse-api/data/company/${element}.json`)
+    
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      // Assuming the API returns JSON data
+      return response.json(); 
+    })
+    .then(data => {
+      // Process the data from the API for today's date
+      console.log('Data from the latest API endpoints:');
 
-// Finds today's date
-date = new Date();
-
-// Changes data to tomorrows date, and re formatting
-console.log(date.setDate(date.getDate() - 1))
-console.log(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`)
-console.log(date.toLocaleTimeString())
-
-fetch(`https://the-value-crew.github.io/nepse-api/data/date/`)
+      keyarray = Object.keys(data)
+      keyarraylen = keyarray.length
+      obj = data[keyarray[keyarraylen - 1]]
+      diff = obj["price"]["diff"]
+      console.log(diff)
+      console.log(obj)
+      document.querySelector(".output").innerText = diff
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation for today:', error);
+    });
+  })  
+}

@@ -8,7 +8,6 @@
     "default_title": "Test Extension"
   },
   "permissions": [
-    "notifications",
-    "https://api.example.com/data/date/latest.json"
+    "notifications"
   ]
 }

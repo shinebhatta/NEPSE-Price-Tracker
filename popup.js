@@ -8,7 +8,7 @@ function notification() {
   chrome.notifications.create(
       {
           title: 'NEPSE Price Update',
-          message: 'The Price of X has changed',
+          message: `Price has changed by ${diff})`,
           iconUrl: 'icon.png',
           type: 'basic'
       }
